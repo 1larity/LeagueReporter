@@ -144,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
      * get data and refresh UI
      */
     private void refreshData() {
-        GetFeedTask SeasonsAsyncTask = new GetFeedTask(this);
-       SeasonsAsyncTask.execute(GetFeedTask.SEASONS);
+        GetFeedTask seasonsAsyncTask = new GetFeedTask(this);
+       seasonsAsyncTask.execute(GetFeedTask.SEASONS);
         GetFeedTask leagueAsyncTask = new GetFeedTask(this);
         leagueAsyncTask.execute(GetFeedTask.LEAGUE);
         GetFeedTask teamAsyncTask = new GetFeedTask(this);
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         loadImages();
-        initRefreshHandler();
+      //  initRefreshHandler();
     }
     @Override
     public void onPause() {

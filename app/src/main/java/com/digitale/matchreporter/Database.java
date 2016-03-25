@@ -31,9 +31,9 @@ class Database {
         seasons = new Gson().fromJson(data, type);
         this.setSeasons(seasons);
 //debug loop
-        for (Season currentSeason : this.getSeasons()) {
-            System.out.println("Season " + currentSeason.getCaption());
-        }
+//        for (Season currentSeason : this.getSeasons()) {
+//            System.out.println("Season " + currentSeason.getCaption());
+//        }
     }
 //get list of teams in the league
     public void leagueFromJson(String data) {
@@ -53,10 +53,10 @@ class Database {
             e.printStackTrace();
         }
 //debug loop
-        for(Standing currentStanding:this.league.getStandings()){
-            System.out.println("Team Data "+ currentStanding.getTeamName() +
-                    "\nTEAM LINK" + currentStanding.get_links().getTeam().getHref());
-        }
+//        for(Standing currentStanding:this.league.getStandings()){
+//            System.out.println("Team Data "+ currentStanding.getTeamName() +
+//                    "\nTEAM LINK" + currentStanding.get_links().getTeam().getHref());
+//        }
     }
     //get basic team information
     public void teamFromJson(String data) {

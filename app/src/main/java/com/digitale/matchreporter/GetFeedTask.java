@@ -108,6 +108,7 @@ class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
 
 
     public void onPostExecute(TaskResult result) {
+        System.out.println("REFRESHUI");
         if (result.getMode() == SEASONS) {
             //update the UI for seasons  data changes
             activity.mSeasons.clear();
@@ -125,25 +126,6 @@ class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
             }
         } else if(result.getMode()== TEAM){
             activity.mTeamFragment.invalidateTeamView(activity);
-        } else if (result.getMode() == 100) {
-            //update the UI for statistics data changes
-//            activity.mStatsData = result.statsData;
-//            activity.mHomeList.clear();
-//            activity.mHomeList.addAll(activity.mStatsData.homeTeam.players);
-//            activity.mAwayList.clear();
-//            activity.mAwayList.addAll(activity.mStatsData.awayTeam.players);
-//            activity.mEventList.clear();
-//            activity.mEventList.addAll(activity.mStatsData.events);
-            try {
-                activity.mMatchInfoFragment.invalidateMatchInfoView(activity);
-           //     activity.mTeamFragment.invalidateHomeTeamView(activity);
-            //    activity.mAwayTeamFragment.invalidateAwayTeamView(activity);
-                MainActivity.mAwayPlayerAdaptor.notifyDataSetChanged();
-                MainActivity.mHomePlayerAdaptor.notifyDataSetChanged();
-                MainActivity.mEventAdaptor.notifyDataSetChanged();
-            } catch (NullPointerException e) {
-                //fragment simply doesn't exist yet, not a problem
-            }
         } else if (result.getMode() == NETWORKFAIL) {
             //Oh Google! Enforced statics in abstract classes make baby jesus cry!
             Toast.makeText(activity.getContext(), "Cannot contact server, please try again later",

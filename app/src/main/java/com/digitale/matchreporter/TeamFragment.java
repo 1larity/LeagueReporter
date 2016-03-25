@@ -13,6 +13,16 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 /**
  * Match info Fragment.
  */
@@ -46,7 +56,7 @@ public class TeamFragment extends Fragment implements FragmentNotifier {
         if (rootView != null) {
             TextView textTeamName = (TextView) rootView.findViewById(R.id.cTeamName);
             TextView textValue = (TextView) rootView.findViewById(R.id.cSquadValue);
-            TextView textGoals = (TextView) rootView.findViewById(R.id.cGoalDetails);
+
             TextView textPoints = (TextView) rootView.findViewById(R.id.cWins);
             textTeamName.setText(activity.mDatabase.team.getName() + " (" +
                     activity.mDatabase.team.getShortName() + ")");
@@ -55,13 +65,51 @@ public class TeamFragment extends Fragment implements FragmentNotifier {
             }else {
                 textValue.setText("Unknown");
             }
-            textGoals.setText(MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoals() +
-                    ". Goals against " + MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoalsAgainst() +
-                    ". Goal difference " + MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoalDifference());
-            textPoints.setText( MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getPoints() +
-                            ". Wins " + MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getWins() +
-                            ". Losses " +MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getLosses() +
-                            ". Draws " + MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getDraws());
+            int lGoals=MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoals();
+            int lGoalsAgainst =MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoalsAgainst();
+            int lGoalsDiff= MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoalDifference();
+            int lWins=MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getWins();
+            int lDraws=MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getDraws();
+            int lLosses=MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getLosses();
+            textPoints.setText(String.valueOf( MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getPoints()));
+            PieChart goalsChart =(PieChart)rootView.findViewById(R.id.chartGoals);
+          setChart(lGoals, lGoalsAgainst, lGoalsDiff, goalsChart,"Goals");
+            PieChart winsChart =(PieChart)rootView.findViewById(R.id.chartWins);
+            setChart(lWins,lLosses,lDraws,winsChart,"Results");
         }
+
+    }
+    public void setChart(int goals,int goalsAgainst,int goalDiff,PieChart chart,String title){
+        ArrayList <Entry> dataSet=new ArrayList<Entry>();
+        //set data
+        Entry c1=new Entry(goals,0);
+        Entry c2=new Entry(goalsAgainst,1);
+        Entry c3=new Entry(goalDiff,2);
+        dataSet.add(c1);
+        dataSet.add(c2);
+        dataSet.add(c3);
+        PieDataSet goalData=new PieDataSet(dataSet,"");
+        ArrayList<String> xVals = new ArrayList<String>();
+       if(title.equals("Goals")) {
+           xVals.add("For");
+           xVals.add("Against");
+           xVals.add("Difference");
+       }else{
+           xVals.add("Wins");
+           xVals.add("Losses");
+           xVals.add("Draws");
+       }
+        //set appearence
+        chart.setDrawSliceText(false);
+        chart.setDescription("");
+        chart.setCenterText(title);
+        goalData.setValueTextSize(15f);
+        goalData.setColors(new int[]{R.color.green, R.color.red, R.color.yellow}, (MainActivity) getActivity());
+        DecimalFormat format=new DecimalFormat("##");
+        goalData.setValueFormatter(new IntegerFormatter());
+        PieData pieData=new PieData(xVals,goalData);
+        chart.animateXY(1000, 1000);
+        chart.setData(pieData);
+        chart.invalidate();
     }
 }
