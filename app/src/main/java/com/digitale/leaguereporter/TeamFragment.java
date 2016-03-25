@@ -57,16 +57,21 @@ public class TeamFragment extends Fragment implements FragmentNotifier {
             TextView textValue = (TextView) rootView.findViewById(R.id.cSquadValue);
 
             TextView textPoints = (TextView) rootView.findViewById(R.id.cWins);
-            textTeamName.setText(activity.mDatabase.team.getName() + " (" +
-                    activity.mDatabase.team.getShortName() + ")");
-            if(activity.mDatabase.team.getSquadMarketValue()!=null) {
-                textValue.setText(activity.mDatabase.team.getSquadMarketValue());
+            if(MainActivity.mDatabase.team.getShortName()!="null") {
+                textTeamName.setText(MainActivity.mDatabase.team.getName() + " (" +
+                        MainActivity.mDatabase.team.getShortName() + ")");
+            }else{
+                textTeamName.setText(MainActivity.mDatabase.team.getName());
+            }
+            System.out.println("QUAD VALUE"+MainActivity.mDatabase.team.getSquadMarketValue());
+            if(MainActivity.mDatabase.team.getSquadMarketValue()!="null") {
+                textValue.setText(MainActivity.mDatabase.team.getSquadMarketValue());
             }else {
                 textValue.setText("Unknown");
             }
             int lGoals=MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoals();
             int lGoalsAgainst =MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoalsAgainst();
-            int lGoalsDiff=Math.abs( MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoalDifference());
+            int lGoalsDiff=Math.abs(MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoalDifference());
             int lWins=MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getWins();
             int lDraws=MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getDraws();
             int lLosses=MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getLosses();

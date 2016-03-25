@@ -60,6 +60,7 @@ class Database {
     }
     //get basic team information
     public void teamFromJson(String data) {
+        this.team=new Team();
         try {
             JSONObject jTeam=new JSONObject(data);
             this.team=new Team(jTeam.getString("name"),
@@ -69,6 +70,7 @@ class Database {
               } catch (JSONException e) {
             e.printStackTrace();
         }
+        System.out.println("NEW TEAM DATA "+ this.getTeam().getName() );
     }
     //get list of players in team
     public void PlayersFromJson(String data) {
@@ -107,5 +109,8 @@ class Database {
     }
     public Team getTeam() {
         return team;
+    }
+    public void setTeam(Team team) {
+        this.team=team;
     }
 }

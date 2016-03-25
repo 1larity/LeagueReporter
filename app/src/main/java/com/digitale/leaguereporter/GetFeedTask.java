@@ -85,6 +85,7 @@ class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
                     activity.mDatabase.leagueFromJson(str);
                 }else if (mode == TEAM) {
                     System.out.println("TEAM DATA " + str);
+
                     activity.mDatabase.teamFromJson(str);
                 }else if (mode == PLAYERS){
                     System.out.println("PLAYERS DATA"+str);
@@ -124,14 +125,20 @@ class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
             } catch (NullPointerException e) {
                 //fragment simply doesn't exist yet, not a problem
             }
-        } else if(result.getMode()== TEAM || result.getMode()== PLAYERS){
-            if(activity.mDatabase.getTeam().size()>0) {
+        } else if(result.getMode()== TEAM){// || result.getMode()== PLAYERS){
+            System.out.println("DB TEAM CONTENTS"+activity.mDatabase.getTeam().getName());
                 try {
                     activity.mTeamFragment.invalidateTeamView(activity);
                 } catch (NullPointerException e) {
                     //fragment simply doesn't exist yet, not a problem
                 }
 
+                activity.mPlayerList.clear();
+                activity.mPlayerList.addAll(activity.mDatabase.getTeam().getPlayers());
+                MainActivity.mPlayerAdapter.notifyDataSetChanged();
+
+        } else if( result.getMode()== PLAYERS){
+            if(activity.mDatabase.getTeam().size()>0) {
                 activity.mPlayerList.clear();
                 activity.mPlayerList.addAll(activity.mDatabase.getTeam().getPlayers());
                 MainActivity.mPlayerAdapter.notifyDataSetChanged();
