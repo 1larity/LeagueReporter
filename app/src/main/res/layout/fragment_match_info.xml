@@ -114,7 +114,7 @@
         android:layout_alignBaseline="@+id/labelReferee"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
-        android:text="@string/refereeName" />
+        android:text="@string/squadValue" />
 
     <ListView
         android:id="@+id/eventListView"

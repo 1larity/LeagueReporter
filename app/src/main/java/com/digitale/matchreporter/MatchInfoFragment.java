@@ -40,11 +40,11 @@ public class MatchInfoFragment extends Fragment implements FragmentNotifier{
         TextView textAttendance = (TextView) rootView.findViewById(R.id.cAttendance);
         TextView textReferee = (TextView) rootView.findViewById(R.id.cReferee);
         TextView textDuration = (TextView) rootView.findViewById(R.id.cDuration);
-        textCompetition.setText(activity.mStatsData.matchData.getCompetition());
-        textVenue.setText(activity.mStatsData.matchData.getVenue());
-        textKickOff.setText(activity.mStatsData.matchData.getMatchTimeAsString());
-        textAttendance.setText(String.valueOf(activity.mStatsData.matchData.getAttendance()));
-        textReferee.setText(activity.mStatsData.matchData.getReferee());
-        textDuration.setText(activity.mStatsData.matchData.getMatchDuration());
+//        textCompetition.setText(activity.mStatsData.matchData.getCompetition());
+//        textVenue.setText(activity.mStatsData.matchData.getVenue());
+//        textKickOff.setText(activity.mStatsData.matchData.getMatchTimeAsString());
+//        textAttendance.setText(String.valueOf(activity.mStatsData.matchData.getAttendance()));
+//        textReferee.setText(activity.mStatsData.matchData.getReferee());
+//        textDuration.setText(activity.mStatsData.matchData.getMatchDuration());
     }
 }

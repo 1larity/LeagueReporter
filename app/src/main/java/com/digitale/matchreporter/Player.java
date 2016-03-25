@@ -7,39 +7,24 @@ import android.graphics.Bitmap;
  * container for player data
  */
 public class Player {
+    int id;
     String name;
-    String number;
     String position;
-    String formationPlace;
-    String yellowCard;
-    String redCard;
-    String whenSubstituted;
-    String whichSubstitute;
+    String jerseyNumber;
+    String dateOfBirth;
+    String nationality;
+    String contractUntil;
+    String marketValue;
     Bitmap bitmap;
-    /**
-     * Full Constructor
-     * don't need this using reflection to build data
-     */
-    public Player(String name,String number,String position,String formationPlace,
-                  String yellowCard,String redCard, String whenSubstituted, String whichSubstitute) {
 
-            this.name = name;
-            this.number = number;
-            this.position = position;
-            this.formationPlace = formationPlace;
-            this.yellowCard = yellowCard;
-            this.redCard = redCard;
-            this.whenSubstituted =whenSubstituted;
-            this.whichSubstitute=whichSubstitute;
-
-    }
-    public Bitmap getBitmap() {
-        return bitmap;
+    public int getId() {
+        return id;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setId(int id) {
+        this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -48,25 +33,66 @@ public class Player {
         this.name = name;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
     public String getPosition() {
         return position;
     }
 
-    public String getYellowCard() {
-        return yellowCard;
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getJerseyNumber() {
+        return jerseyNumber;
+    }
+
+    public void setJerseyNumber(String jerseyNumber) {
+        this.jerseyNumber = jerseyNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getContractUntil() {
+        return contractUntil;
+    }
+
+    public void setContractUntil(String contractUntil) {
+        this.contractUntil = contractUntil;
+    }
+
+    public String getMarketValue() {
+        return marketValue;
+    }
+
+    public void setMarketValue(String marketValue) {
+        this.marketValue = marketValue;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
 
-    public String getWhenSubstituted() {
-        return whenSubstituted;
+
     }
 
-    public String getWhichSubstitute() {
-        return whichSubstitute;
-    }
 
-}
+
+

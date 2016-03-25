@@ -59,31 +59,31 @@ public class PlayerAdapter extends BaseAdapter {
             TextView textHeading = (TextView) itemView.findViewById(R.id.cPlayerName);
             textHeading.setText(mData.get(position).getName());
             TextView textDetail = (TextView) itemView.findViewById(R.id.cNumber);
-            textDetail.setText(mData.get(position).getNumber());
+         //   textDetail.setText(mData.get(position).getNumber());
             TextView textRole = (TextView) itemView.findViewById(R.id.cRole);
             textRole.setText(mData.get(position).getPosition());
 
             //set cards (presumably player data elements can contain field "redCard" as well as yellowCard)
             //Also this check should be iterative since players can receive multiple yellow cards.
-            TextView textCards = (TextView) itemView.findViewById(R.id.cCards);
-            if (mData.get(position).getYellowCard() != null && mData.get(position).getYellowCard().length()>0 ) {
-
-                textCards.setText("Recieved yellow card in the " + mData.get(position).getYellowCard() +
-                        numberpostfix(mData.get(position).getYellowCard())+" minute.");
-            }else{
-                //If no card was awarded we need to blank the text to prevent object reuse displaying incorrect data
-                textCards.setText("");
-            }
-
-            //Set substitution information if required
-            TextView textSubstitute = (TextView) itemView.findViewById(R.id.cSubstitution);
-            if (mData.get(position).getWhenSubstituted() != null && mData.get(position).getWhenSubstituted().length()>0) {
-                        textSubstitute.setText("Substituted in the " + mData.get(position).getWhenSubstituted() +
-                                numberpostfix(mData.get(position).getWhenSubstituted())+ " minute by " + mData.get(position).getWhichSubstitute() + ".");
-            }else{
-                //If no sub occurred we need to blank the text to prevent object reuse displaying incorrect data
-                textSubstitute.setText("");
-            }
+//            TextView textCards = (TextView) itemView.findViewById(R.id.cCards);
+//            if (mData.get(position).getYellowCard() != null && mData.get(position).getYellowCard().length()>0 ) {
+//
+//                textCards.setText("Recieved yellow card in the " + mData.get(position).getYellowCard() +
+//                        numberpostfix(mData.get(position).getYellowCard())+" minute.");
+//            }else{
+//                //If no card was awarded we need to blank the text to prevent object reuse displaying incorrect data
+//                textCards.setText("");
+//            }
+//
+//            //Set substitution information if required
+//            TextView textSubstitute = (TextView) itemView.findViewById(R.id.cSubstitution);
+//            if (mData.get(position).getWhenSubstituted() != null && mData.get(position).getWhenSubstituted().length()>0) {
+//                        textSubstitute.setText("Substituted in the " + mData.get(position).getWhenSubstituted() +
+//                                numberpostfix(mData.get(position).getWhenSubstituted())+ " minute by " + mData.get(position).getWhichSubstitute() + ".");
+//            }else{
+//                //If no sub occurred we need to blank the text to prevent object reuse displaying incorrect data
+//                textSubstitute.setText("");
+//            }
 
             return itemView;
         }

@@ -30,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
     public static UI ui=new UI();
     public static ArrayList<PlayerPortrait> mPlayerPortraits = new ArrayList<>();
     private static SectionsPagerAdapter mSectionsPagerAdapter;
+
     public ViewPager mViewPager;
     public static MainActivity mActivity;
-    public StandingsFragment mStandingsDetailFragment;
+    public StandingsFragment mStandingsFragment;
     public SeasonsFragment mCommentaryFragment;
     public MatchInfoFragment mMatchInfoFragment;
-    public TeamFragment mHomeTeamFragment=new TeamFragment();
-    public TeamFragment mAwayTeamFragment=new TeamFragment();
+    public TeamFragment mTeamFragment =new TeamFragment();
     /**
      * Data members
      */
@@ -44,12 +44,15 @@ public class MainActivity extends AppCompatActivity {
     ArrayList <Season>mSeasons=new ArrayList<>();
     static int mLeagueID=398;
     int mSeasonYear=2015;
+    //data sourc team id
+    static int mTeamID=66;
+    //internal database id
+    public static int mTeamIndex;
     ArrayList <Standing>mStandings=new ArrayList<>();
     public  ArrayList<CommentaryListItem> mCommentaryList = new ArrayList<>();
     public  ArrayList<Player> mHomeList = new ArrayList<>();
     public  ArrayList<Player> mAwayList = new ArrayList<>();
     public  ArrayList<Event> mEventList = new ArrayList<>();
-    public  StatsData mStatsData = new StatsData();
     /**
      * Logic members
      */
@@ -145,6 +148,8 @@ public class MainActivity extends AppCompatActivity {
        SeasonsAsyncTask.execute(GetFeedTask.SEASONS);
         GetFeedTask leagueAsyncTask = new GetFeedTask(this);
         leagueAsyncTask.execute(GetFeedTask.LEAGUE);
+        GetFeedTask teamAsyncTask = new GetFeedTask(this);
+        teamAsyncTask.execute(GetFeedTask.TEAM);
     }
     @Override
     public void onDestroy() {
@@ -208,13 +213,14 @@ public class MainActivity extends AppCompatActivity {
                     fragment= new StandingsFragment();
                     break;
                 case 2:
-                    fragment= new MatchInfoFragment();
+                    fragment= new TeamFragment();
                     break;
                 case 3:
                     fragment= new TeamFragment ();
                     break;
                 case 4:
                     fragment= new TeamFragment ();
+                    break;
             }
             return fragment;
         }
@@ -231,16 +237,16 @@ public class MainActivity extends AppCompatActivity {
                     mCommentaryFragment = (SeasonsFragment) createdFragment;
                     break;
                 case 1:
-                    mStandingsDetailFragment = (StandingsFragment) createdFragment;
+                    mStandingsFragment = (StandingsFragment) createdFragment;
                     break;
                 case 2:
-                    mMatchInfoFragment = (MatchInfoFragment) createdFragment;
+                    mTeamFragment = (TeamFragment) createdFragment;
                     break;
                 case 3:
-                    mHomeTeamFragment = (TeamFragment) createdFragment;
+                 //   mTeamFragment = (TeamFragment) createdFragment;
                     break;
                 case 4:
-                    mAwayTeamFragment = (TeamFragment) createdFragment;
+               //     mPlayerFragment = (PlayerFragment) createdFragment;
                     break;
             }
             return createdFragment;
@@ -254,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return "League Teams";
                 case 2:
-                    return "Match\nInfo";
+                    return "Team\nInfo";
                 case 3:
                     return "Home\nTeam";
                 case 4:

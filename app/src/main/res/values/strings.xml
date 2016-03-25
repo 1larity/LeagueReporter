@@ -7,7 +7,7 @@
     <string name="commentaryPrev">Previous</string>
     <string name="commentaryNext">Next</string>
     <string name="competitionName"> Competition Name</string>
-    <string name="refereeName">Referee Name</string>
+    <string name="squadValue">Squad Value</string>
     <string name="matchReferee">Referee</string>
     <string name="attendanceText">Attendance text</string>
     <string name="matchAttendance">Attendance</string>
@@ -21,8 +21,11 @@
     <string name="loadMessage">loadmessage</string>
     <string name="labelTeamName">Team</string>
     <string name="teamName">Team Name</string>
-    <string name="labelManagerName">Manager</string>
+    <string name="labelSquadValue">Squad value</string>
     <string name="labelFormation">Formation</string>
     <string name="formation">Formation type</string>
     <string name="seasonsURL">http://api.football-data.org/v1/soccerseasons/</string>
+    <string name="teamURL">http://api.football-data.org/v1/teams/</string>
+    <string name="goalLabel">Goals</string>
+    <string name="winLabel">Points</string>
 </resources>

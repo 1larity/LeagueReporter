@@ -16,14 +16,17 @@ import android.widget.TextView;
 /**
  * Match info Fragment.
  */
-public class TeamFragment extends Fragment implements FragmentNotifier{
+public class TeamFragment extends Fragment implements FragmentNotifier {
     View rootView = null;
+
     public TeamFragment() {
     }
+
     @Override
     public void fragmentVisible() {
-        //invalidateCommentaryDetailView((MainActivity) getActivity());
+        //do animation here
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,31 +34,34 @@ public class TeamFragment extends Fragment implements FragmentNotifier{
         super.onCreate(savedInstanceState);
         String tag = this.getTag();
         tag = tag.substring(tag.lastIndexOf(':') + 1);
-        if (tag.equals("3")) {
-            ListView mHomeListView = (ListView) rootView.findViewById(R.id.teamListView);
-            mHomeListView.setAdapter(MainActivity.mHomePlayerAdaptor);
-            invalidateHomeTeamView((MainActivity) getActivity());
-        } else if (tag.equals("4")){
-            ListView mAwayListView = (ListView) rootView.findViewById(R.id.teamListView);
-            mAwayListView.setAdapter(MainActivity.mAwayPlayerAdaptor);
-            invalidateAwayTeamView((MainActivity) getActivity());
-        }
+
+        ListView mHomeListView = (ListView) rootView.findViewById(R.id.teamListView);
+        mHomeListView.setAdapter(MainActivity.mHomePlayerAdaptor);
+        invalidateTeamView((MainActivity) getActivity());
+
         return rootView;
     }
-    public  void invalidateHomeTeamView(MainActivity activity) {
-        TextView textTeamName = (TextView) rootView.findViewById(R.id.cTeamName);
-        TextView textManager = (TextView) rootView.findViewById(R.id.cManager);
-        TextView textFormation = (TextView) rootView.findViewById(R.id.cFormation);
-        textTeamName.setText(activity.mStatsData.homeTeam.getName());
-        textManager.setText(activity.mStatsData.homeTeam.getManager());
-        textFormation.setText(activity.mStatsData.homeTeam.getFormation());
-    }
-    public  void invalidateAwayTeamView(MainActivity activity) {
-        TextView textTeamName = (TextView) rootView.findViewById(R.id.cTeamName);
-        TextView textManager = (TextView) rootView.findViewById(R.id.cManager);
-        TextView textFormation = (TextView) rootView.findViewById(R.id.cFormation);
-        textTeamName.setText(activity.mStatsData.awayTeam.getName());
-        textManager.setText(activity.mStatsData.awayTeam.getManager());
-        textFormation.setText(activity.mStatsData.awayTeam.getFormation());
+
+    public void invalidateTeamView(MainActivity activity) {
+        if (rootView != null) {
+            TextView textTeamName = (TextView) rootView.findViewById(R.id.cTeamName);
+            TextView textValue = (TextView) rootView.findViewById(R.id.cSquadValue);
+            TextView textGoals = (TextView) rootView.findViewById(R.id.cGoalDetails);
+            TextView textPoints = (TextView) rootView.findViewById(R.id.cWins);
+            textTeamName.setText(activity.mDatabase.team.getName() + " (" +
+                    activity.mDatabase.team.getShortName() + ")");
+            if(activity.mDatabase.team.getSquadMarketValue()!=null) {
+                textValue.setText(activity.mDatabase.team.getSquadMarketValue());
+            }else {
+                textValue.setText("Unknown");
+            }
+            textGoals.setText(MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoals() +
+                    ". Goals against " + MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoalsAgainst() +
+                    ". Goal difference " + MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getGoalDifference());
+            textPoints.setText( MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getPoints() +
+                            ". Wins " + MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getWins() +
+                            ". Losses " +MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getLosses() +
+                            ". Draws " + MainActivity.mDatabase.getLeague().getStandings().get(MainActivity.mTeamIndex).getDraws());
+        }
     }
 }

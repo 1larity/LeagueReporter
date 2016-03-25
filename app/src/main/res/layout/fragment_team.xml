@@ -28,43 +28,64 @@
         android:layout_marginLeft="15dp" />
     <!-- Event Heading Line -->
 
-    <TextView android:id="@+id/labelManager"
+    <TextView android:id="@+id/labelSquadValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/labelTeam"
         android:layout_marginTop="20dp"
-        android:text="@string/labelManagerName"
+        android:text="@string/labelSquadValue"
         android:textStyle="bold" />
 
-    <TextView android:id="@+id/cManager"
+    <TextView android:id="@+id/cSquadValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/labelManager"
-        android:layout_alignBaseline="@+id/labelManager"
+        android:layout_toRightOf="@+id/labelSquadValue"
+        android:layout_alignBaseline="@+id/labelSquadValue"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="15dp"
-        android:text="@string/refereeName" />
+        android:text="@string/squadValue" />
 
     <TextView
-        android:id="@+id/labelFormation"
+        android:id="@+id/labelGoalDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/goalLabel"
         android:layout_marginTop="20dp"
-        android:text="@string/labelFormation"
         android:textStyle="bold"
-        android:layout_below="@+id/labelManager"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_below="@+id/labelSquadValue"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/cFormation"
+        android:id="@+id/cGoalDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/squadValue"
         android:layout_marginLeft="15dp"
-        android:text="@string/formation"
-        android:layout_alignBaseline="@+id/labelFormation"
-        android:layout_toRightOf="@+id/labelFormation" />
+        android:layout_alignBottom="@+id/labelGoalDetails"
+        android:layout_toRightOf="@+id/labelGoalDetails"
+        android:layout_toEndOf="@+id/labelGoalDetails" />
 
+    <TextView
+        android:id="@+id/labelWins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/winLabel"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/labelGoalDetails"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/cWins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/squadValue"
+        android:layout_marginLeft="15dp"
+        android:layout_above="@+id/teamListView"
+        android:layout_toRightOf="@+id/labelWins"
+        android:layout_toEndOf="@+id/labelWins" />
 
     <ListView
         android:id="@+id/teamListView"
@@ -73,7 +94,7 @@
         android:clickable="true"
         android:overScrollMode="ifContentScrolls"
         android:paddingTop="20dp"
-        android:layout_below="@+id/labelFormation"
+        android:layout_below="@+id/labelWins"
         android:layout_centerHorizontal="true"
         android:paddingBottom="?attr/actionBarSize" />
 

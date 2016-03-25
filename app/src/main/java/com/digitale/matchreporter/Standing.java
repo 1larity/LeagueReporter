@@ -19,13 +19,37 @@ class Standing {
     private int losses;
     private TeamStats away;
     private TeamStats home;
-
+    private Links _links;
 
     /**
 
      * Blank Constructor
      */
     public Standing() {
+    }
+
+    public Links get_links() {
+        return _links;
+    }
+
+//    public void set_links(Links _links) {
+//        this._links = _links;
+//    }
+
+    public TeamStats getAway() {
+        return away;
+    }
+
+    public void setAway(TeamStats away) {
+        this.away = away;
+    }
+
+    public TeamStats getHome() {
+        return home;
+    }
+
+    public void setHome(TeamStats home) {
+        this.home = home;
     }
 
     public int getWins() {

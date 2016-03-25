@@ -6,48 +6,29 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 /**
- * Created by Rich on 15/03/2016.
- * container for match data
+ * Created by Rich on 24/03/2016.
+ * container for team data
  */
 public class Team {
     String name;
-    String id;
-    String manager;
-    String formation;
+    String squadMarketValue;
+    String crestURL;
+    String shortName;
     ArrayList<Player> players = new ArrayList<>();
     /**
      * Blank Constructor
      */
     public Team() {
+
     }
-    /**
-     * JSON Constructor
-     */
-    public Team(JSONObject jTeam) {
-        JSONArray lPlayers;
-        try {
-            this.name = jTeam.getString("name");
-            this.id = jTeam.getString("id");
-            this.manager = jTeam.getString("manager");
-            this.formation = jTeam.getString("formation");
-            lPlayers = jTeam.getJSONArray("team");
-            //create player records using reflection and Google Json decoder
-            java.lang.reflect.Type type =
-                    new com.google.gson.reflect.TypeToken<ArrayList<Player>>() {
-                    }.getType();
-            this.players = new Gson().fromJson(String.valueOf(lPlayers), type);
-            //set player portrait
-            for (int i = 0; i < this.players.size(); i++) {
-                if (this.getName().equals("Bournemouth")) {
-                    this.players.get(i).setBitmap(MainActivity.mPlayerPortraits.get(i).bitmap);
-                } else if (this.getName().equals("Everton")) {
-                    this.players.get(i).setBitmap(MainActivity.mPlayerPortraits.get(i + 18).bitmap);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
+    public Team(String name, String squadMarketValue, String shortName, String crestURL) {
+    this.name=name;
+        this.squadMarketValue=squadMarketValue;
+        this.shortName=shortName;
+        this.crestURL=crestURL;
     }
+
     public String getName() {
         return name;
     }
@@ -55,18 +36,35 @@ public class Team {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getId() {
-        return id;
+    public String getSquadMarketValue() {
+        return squadMarketValue;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSquadMarketValue(String squadMarketValue) {
+        this.squadMarketValue = squadMarketValue;
     }
-    public String getManager() {
-        return manager;
+
+    public String getCrestURL() {
+        return crestURL;
     }
-    public String getFormation() {
-        return formation;
+
+    public void setCrestURL(String crestURL) {
+        this.crestURL = crestURL;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
     }
 }

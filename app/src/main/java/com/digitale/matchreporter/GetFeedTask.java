@@ -12,7 +12,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.Collections;
 
 /**
  * Get JSON data from incrowd Website.
@@ -21,9 +20,13 @@ import java.util.Collections;
  * params[1] The URL of the data.
  */
 class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
+    private static final int NETWORKFAIL = -1;
     public static final int SEASONS = 1;
     public static final int LEAGUE = 2;
-    private static final int NETWORKFAIL = 5;
+    public static final int TEAM = 3;
+    public static final int PLAYERS = 4;
+    public static final int PLAYER = 3;
+
     public MainActivity activity;
 
     public GetFeedTask(MainActivity activity) {
@@ -50,6 +53,14 @@ class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
                 getURL = activity.getString(R.string.seasonsURL) + String.valueOf(activity.mLeagueID) + "/leagueTable";
                 System.out.println("getting league URL " + getURL);
                 break;
+            case TEAM:
+                getURL = activity.getString(R.string.teamURL) + String.valueOf(activity.mTeamID);
+                System.out.println("getting team URL " + getURL);
+                break;
+            case PLAYERS:
+                getURL = activity.getString(R.string.teamURL) + String.valueOf(activity.mTeamID)+"players";
+                System.out.println("getting players URL " + getURL);
+                break;
         }
         //nasty deprecated stuff I need for my phone
         //HttpURLConnection is v buggy Eclair/Froyo
@@ -69,11 +80,20 @@ class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
                 if (mode == SEASONS) {
                     System.out.println("SEASON DATA " + str);
                     activity.mDatabase.seasonsFromJson(str);
-                }
-                if (mode == LEAGUE) {
+                }else if (mode == LEAGUE) {
                     System.out.println("LEAGUE DATA " + str);
                     activity.mDatabase.leagueFromJson(str);
+                }else if (mode == TEAM) {
+                    System.out.println("TEAM DATA " + str);
+                    activity.mDatabase.teamFromJson(str);
+                }else if (mode == PLAYERS){
+                    System.out.println("PLAYERS DATA");
+                 //   activity.mDatabase.PlayersFromJson;
+                }else if (mode == PLAYER){
+                    System.out.println("PLAYER DATA");
+                //    activity.mDatabase.PlayerFromJson;
                 }
+
                 results.setMode(mode);
             }
         } catch (ClientProtocolException e) {
@@ -99,24 +119,25 @@ class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
             activity.mStandings.addAll(activity.mDatabase.getLeague().getStandings());
             MainActivity.mStandingsAdaptor.notifyDataSetChanged();
             try {
-                activity.mStandingsDetailFragment.invalidateStandingsInfoView(activity);
+                activity.mStandingsFragment.invalidateStandingsInfoView(activity);
             } catch (NullPointerException e) {
                 //fragment simply doesn't exist yet, not a problem
             }
-
+        } else if(result.getMode()== TEAM){
+            activity.mTeamFragment.invalidateTeamView(activity);
         } else if (result.getMode() == 100) {
             //update the UI for statistics data changes
-            activity.mStatsData = result.statsData;
-            activity.mHomeList.clear();
-            activity.mHomeList.addAll(activity.mStatsData.homeTeam.players);
-            activity.mAwayList.clear();
-            activity.mAwayList.addAll(activity.mStatsData.awayTeam.players);
-            activity.mEventList.clear();
-            activity.mEventList.addAll(activity.mStatsData.events);
+//            activity.mStatsData = result.statsData;
+//            activity.mHomeList.clear();
+//            activity.mHomeList.addAll(activity.mStatsData.homeTeam.players);
+//            activity.mAwayList.clear();
+//            activity.mAwayList.addAll(activity.mStatsData.awayTeam.players);
+//            activity.mEventList.clear();
+//            activity.mEventList.addAll(activity.mStatsData.events);
             try {
                 activity.mMatchInfoFragment.invalidateMatchInfoView(activity);
-                activity.mHomeTeamFragment.invalidateHomeTeamView(activity);
-                activity.mAwayTeamFragment.invalidateAwayTeamView(activity);
+           //     activity.mTeamFragment.invalidateHomeTeamView(activity);
+            //    activity.mAwayTeamFragment.invalidateAwayTeamView(activity);
                 MainActivity.mAwayPlayerAdaptor.notifyDataSetChanged();
                 MainActivity.mHomePlayerAdaptor.notifyDataSetChanged();
                 MainActivity.mEventAdaptor.notifyDataSetChanged();
