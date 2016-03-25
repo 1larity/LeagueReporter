@@ -1,4 +1,4 @@
-package com.digitale.matchreporter;
+package com.digitale.leaguereporter;
 
 import org.junit.Test;
 

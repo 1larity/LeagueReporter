@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Match Reporter</string>
+    <string name="app_name">League Reporter</string>
     <string name="commentaryEvent">Event</string>
     <string name="commentaryHeading">Heading</string>
     <string name="commentaryDescription">Description</string>

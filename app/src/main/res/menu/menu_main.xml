@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.digitale.matchreporter.MainActivity">
+    tools:context="com.digitale.leaguereporter.MainActivity">
         <item
             android:id="@+id/androidSkin"
             android:enabled="true"
