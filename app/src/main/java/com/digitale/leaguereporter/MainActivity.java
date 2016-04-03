@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public static Database mDatabase=new Database();
     ArrayList <Season>mSeasons=new ArrayList<>();
     static int mLeagueID=398;
-    int mSeasonYear=2015;
+    public int mSeasonYear=2015;
     //data source team id
     static int mTeamID=66;
     //internal database id

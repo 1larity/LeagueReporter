@@ -20,6 +20,7 @@ import java.io.IOException;
  * params[1] The URL of the data.
  */
 class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
+    private static final int NODATA = -2;
     private static final int NETWORKFAIL = -1;
     public static final int SEASONS = 1;
     public static final int LEAGUE = 2;
@@ -82,8 +83,12 @@ class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
                     activity.mDatabase.seasonsFromJson(str);
                 }else if (mode == LEAGUE) {
                     System.out.println("LEAGUE DATA " + str);
-                    activity.mDatabase.leagueFromJson(str);
-                }else if (mode == TEAM) {
+                    if(str.contains("The resource you are looking for does not exist.")){
+                        mode=NODATA;
+                    }else{
+                        activity.mDatabase.leagueFromJson(str);
+                    }
+                    }else if (mode == TEAM) {
                     System.out.println("TEAM DATA " + str);
 
                     activity.mDatabase.teamFromJson(str);
@@ -148,6 +153,11 @@ class GetFeedTask extends AsyncTask<Integer, Void, TaskResult> {
             Toast.makeText(activity.getContext(), "Cannot contact server, please try again later",
                     Toast.LENGTH_LONG).show();
             activity.finish();
+        } else if (result.getMode() == NODATA) {
+            //Oh Google! Enforced statics in abstract classes make baby jesus cry!
+            Toast.makeText(activity.getContext(), "Sorry, we don't have any more data for this.",
+                    Toast.LENGTH_LONG).show();
+            activity.mViewPager.setCurrentItem(0);
         }
     }
 

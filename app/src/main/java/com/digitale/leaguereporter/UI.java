@@ -37,13 +37,13 @@ public class UI {
         activity.setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
-        setTitleBar(activity,toolbar);
+        setTitleBarStyle(activity, toolbar);
         TabLayout mTabLayout = (TabLayout) activity.findViewById(R.id.tabs);
         setTabsTextColours(activity, mTabLayout);
         setTabsBackground(mTabLayout);
         }
 
-        private void setTitleBar(AppCompatActivity activity,Toolbar toolbar) {
+        private void setTitleBarStyle(AppCompatActivity activity, Toolbar toolbar) {
         if (toolbar != null) {
             switch (this.mSkinID) {
                 case THEME_DEFAULT:

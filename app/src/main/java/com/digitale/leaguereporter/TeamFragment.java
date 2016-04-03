@@ -63,7 +63,7 @@ public class TeamFragment extends Fragment implements FragmentNotifier {
             }else{
                 textTeamName.setText(MainActivity.mDatabase.team.getName());
             }
-            System.out.println("QUAD VALUE"+MainActivity.mDatabase.team.getSquadMarketValue());
+            System.out.println("SQUAD VALUE"+MainActivity.mDatabase.team.getSquadMarketValue());
             if(MainActivity.mDatabase.team.getSquadMarketValue()!="null") {
                 textValue.setText(MainActivity.mDatabase.team.getSquadMarketValue());
             }else {
